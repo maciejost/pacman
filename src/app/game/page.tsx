@@ -1,3 +1,5 @@
+import { Game } from './Game'
+
 export default function GameLayout() {
 	return (
 		<html>
@@ -143,12 +145,7 @@ export default function GameLayout() {
 						<div className='loading-dot _90'></div>
 						<div className='loading-dot _95'></div>
 					</div>
-
-					{/* <script>
-        window.onload = () => {
-          let gameCoordinator = new GameCoordinator();
-        }
-      </script> */}
+					<Game />
 				</div>
 			</body>
 		</html>
