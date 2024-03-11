@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="nb">
       <head>
         <meta name="robots" content="noindex,nofollow" />
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -26,7 +26,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body >{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

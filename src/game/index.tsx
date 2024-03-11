@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import GameCoordinator from "./scripts/core/gameCoordinator";
+import GameCoordinator from "./core/gameCoordinator";
 
 export const Game = () => {
   useEffect(() => {
