@@ -1,7 +1,7 @@
 export class SoundManager {
   constructor() {
-    this.baseUrl = 'style/audio/';
-    this.fileFormat = 'mp3';
+    this.baseUrl = "style/audio/";
+    this.fileFormat = "mp3";
     this.masterVolume = 1;
     this.paused = false;
     this.cutscene = true;
@@ -59,7 +59,7 @@ export class SoundManager {
 
     if (!this.dotPlayer) {
       this.queuedDotSound = false;
-      this.dotSound = (this.dotSound === 1) ? 2 : 1;
+      this.dotSound = this.dotSound === 1 ? 2 : 1;
 
       this.dotPlayer = new Audio(
         `${this.baseUrl}dot_${this.dotSound}.${this.fileFormat}`,
@@ -125,7 +125,7 @@ export class SoundManager {
       // Resetting the ambience since an AudioBufferSourceNode can only
       // have 'start()' called once
       if (paused) {
-        this.setAmbience('pause_beat', true);
+        this.setAmbience("pause_beat", true);
       } else {
         this.setAmbience(this.currentAmbience);
       }

@@ -1,6 +1,6 @@
 export class GameEngine {
   constructor(maxFps, entityList) {
-    this.fpsDisplay = document.getElementById('fps-display');
+    this.fpsDisplay = document.getElementById("fps-display");
     this.elapsedMs = 0;
     this.lastFrameTimeMs = 0;
     this.entityList = entityList;
@@ -47,7 +47,7 @@ export class GameEngine {
    */
   draw(interp, entityList) {
     entityList.forEach((entity) => {
-      if (typeof entity.draw === 'function') {
+      if (typeof entity.draw === "function") {
         entity.draw(interp);
       }
     });
@@ -60,7 +60,7 @@ export class GameEngine {
    */
   update(elapsedMs, entityList) {
     entityList.forEach((entity) => {
-      if (typeof entity.update === 'function') {
+      if (typeof entity.update === "function") {
         entity.update(elapsedMs);
       }
     });
@@ -128,7 +128,7 @@ export class GameEngine {
    * @param {number} timestamp - The amount of MS which has passed since starting the game engine
    */
   engineCycle(timestamp) {
-    if (timestamp < this.lastFrameTimeMs + (1000 / this.maxFps)) {
+    if (timestamp < this.lastFrameTimeMs + 1000 / this.maxFps) {
       this.frameId = requestAnimationFrame((nextTimestamp) => {
         this.mainLoop(nextTimestamp);
       });

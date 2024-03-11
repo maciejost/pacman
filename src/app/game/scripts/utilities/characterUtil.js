@@ -1,10 +1,10 @@
 export class CharacterUtil {
   constructor() {
     this.directions = {
-      up: 'up',
-      down: 'down',
-      left: 'left',
-      right: 'right',
+      up: "up",
+      down: "down",
+      left: "left",
+      right: "right",
     };
   }
 
@@ -20,13 +20,15 @@ export class CharacterUtil {
     const threshold = 5;
 
     if (position && oldPosition) {
-      if (Math.abs(position.top - oldPosition.top) > threshold
-        || Math.abs(position.left - oldPosition.left) > threshold) {
+      if (
+        Math.abs(position.top - oldPosition.top) > threshold ||
+        Math.abs(position.left - oldPosition.left) > threshold
+      ) {
         stutter = true;
       }
     }
 
-    return stutter ? 'hidden' : 'visible';
+    return stutter ? "hidden" : "visible";
   }
 
   /**
@@ -38,9 +40,9 @@ export class CharacterUtil {
     switch (direction) {
       case this.directions.up:
       case this.directions.down:
-        return 'top';
+        return "top";
       default:
-        return 'left';
+        return "left";
     }
   }
 
@@ -80,8 +82,8 @@ export class CharacterUtil {
    */
   determineGridPosition(position, scaledTileSize) {
     return {
-      x: (position.left / scaledTileSize) + 0.5,
-      y: (position.top / scaledTileSize) + 0.5,
+      x: position.left / scaledTileSize + 0.5,
+      y: position.top / scaledTileSize + 0.5,
     };
   }
 
@@ -136,8 +138,8 @@ export class CharacterUtil {
    */
   changingGridPosition(oldPosition, position) {
     return (
-      Math.floor(oldPosition.x) !== Math.floor(position.x)
-            || Math.floor(oldPosition.y) !== Math.floor(position.y)
+      Math.floor(oldPosition.x) !== Math.floor(position.x) ||
+      Math.floor(oldPosition.y) !== Math.floor(position.y)
     );
   }
 
@@ -150,7 +152,8 @@ export class CharacterUtil {
    */
   checkForWallCollision(desiredNewGridPosition, mazeArray, direction) {
     const roundingFunction = this.determineRoundingFunction(
-      direction, this.directions,
+      direction,
+      this.directions,
     );
 
     const desiredX = roundingFunction(desiredNewGridPosition.x);
@@ -161,7 +164,7 @@ export class CharacterUtil {
       newGridValue = mazeArray[desiredY][desiredX];
     }
 
-    return (newGridValue === 'X');
+    return newGridValue === "X";
   }
 
   /**
@@ -174,13 +177,18 @@ export class CharacterUtil {
    * @returns {object}
    */
   determineNewPositions(
-    position, direction, velocityPerMs, elapsedMs, scaledTileSize,
+    position,
+    direction,
+    velocityPerMs,
+    elapsedMs,
+    scaledTileSize,
   ) {
     const newPosition = Object.assign({}, position);
-    newPosition[this.getPropertyToChange(direction)]
-      += this.getVelocity(direction, velocityPerMs) * elapsedMs;
+    newPosition[this.getPropertyToChange(direction)] +=
+      this.getVelocity(direction, velocityPerMs) * elapsedMs;
     const newGridPosition = this.determineGridPosition(
-      newPosition, scaledTileSize,
+      newPosition,
+      scaledTileSize,
     );
 
     return {
@@ -199,7 +207,8 @@ export class CharacterUtil {
   snapToGrid(position, direction, scaledTileSize) {
     const newPosition = Object.assign({}, position);
     const roundingFunction = this.determineRoundingFunction(
-      direction, this.directions,
+      direction,
+      this.directions,
     );
 
     switch (direction) {
@@ -230,9 +239,9 @@ export class CharacterUtil {
     const gridPosition = this.determineGridPosition(position, scaledTileSize);
 
     if (gridPosition.x < -0.75) {
-      newPosition.left = (scaledTileSize * (mazeArray[0].length - 0.75));
-    } else if (gridPosition.x > (mazeArray[0].length - 0.25)) {
-      newPosition.left = (scaledTileSize * -1.25);
+      newPosition.left = scaledTileSize * (mazeArray[0].length - 0.75);
+    } else if (gridPosition.x > mazeArray[0].length - 0.25) {
+      newPosition.left = scaledTileSize * -1.25;
     }
 
     return newPosition;
@@ -243,24 +252,23 @@ export class CharacterUtil {
    * @param {Object} character - The character which needs to be animated
    */
   advanceSpriteSheet(character) {
-    const {
-      msSinceLastSprite,
-      animationTarget,
-      backgroundOffsetPixels,
-    } = character;
+    const { msSinceLastSprite, animationTarget, backgroundOffsetPixels } =
+      character;
     const updatedProperties = {
       msSinceLastSprite,
       animationTarget,
       backgroundOffsetPixels,
     };
 
-    const ready = (character.msSinceLastSprite > character.msBetweenSprites)
-      && character.animate;
+    const ready =
+      character.msSinceLastSprite > character.msBetweenSprites &&
+      character.animate;
     if (ready) {
       updatedProperties.msSinceLastSprite = 0;
 
-      if (character.backgroundOffsetPixels
-        < (character.measurement * (character.spriteFrames - 1))
+      if (
+        character.backgroundOffsetPixels <
+        character.measurement * (character.spriteFrames - 1)
       ) {
         updatedProperties.backgroundOffsetPixels += character.measurement;
       } else if (character.loopAnimation) {
