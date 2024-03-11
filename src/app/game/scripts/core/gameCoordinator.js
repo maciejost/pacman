@@ -1,4 +1,4 @@
-class GameCoordinator {
+export class GameCoordinator {
   constructor() {
     this.gameUi = document.getElementById('game-ui');
     this.rowTop = document.getElementById('row-top');
